@@ -1,0 +1,14 @@
+void saveFixturesToFile(const vector<Game>& fixtures, const char* filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Could not open the file: " << filename << endl;
+        return;
+    }
+
+    file << "Home,Away,Town,Stadium,Leg,Weekend\n";
+    for (const auto& match : fixtures) {
+        file << match.home << ',' << match.away << ',' << match.town << ',' << match.stadium << ','
+             << match.leg << ',' << match.weekend << '\n';
+    }
+    file.close();
+}
