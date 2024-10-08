@@ -1,0 +1,26 @@
+void generateFixtures(const vector<Team>& teams, vector<Game>& fixtures) {
+    int weekend = 1;
+    int matchesThisWeekend = 0;
+    vector<Game> localTownMatchesLeg1;
+    vector<Game> localTownMatchesLeg2;
+    set<string> usedStadiums;
+
+    for (int leg = 1; leg <= 2; ++leg) {
+        for (size_t i = 0; i < teams.size(); ++i) {
+            for (size_t j = i + 1; j < teams.size(); ++j) {
+                if (teams[i].town == teams[j].town) {
+                    Game match = {teams[i].name, teams[j].name, teams[i].town, teams[i].stadium, leg, 0};
+                    if (leg == 1) {
+                        localTownMatchesLeg1.push_back(match);
+                    } else {
+                        localTownMatchesLeg2.push_back(match);
+                    }
+                } else {
+                    string stadium = (leg == 1) ? teams[i].stadium : teams[j].stadium;
+                    if (usedStadiums.find(stadium) != usedStadiums.end()) {
+                        continue;
+                    }
+                    Game match = {teams[i].name, teams[j].name, teams[i].town, stadium, leg, weekend};
+                    fixtures.push_back(match);
+                    usedStadiums.insert(stadium);
+                    matchesThisWeekend++;
