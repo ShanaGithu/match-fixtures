@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <set>
+
+using namespace std;
+
+struct Team {
+    string name;
+    string town;
+    string stadium;
+};
+
+struct Game {
+    string home;
+    string away;
+    string town;
+    string stadium;
+    int leg{};
+    int weekend{};
+};
