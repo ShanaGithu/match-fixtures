@@ -1,0 +1,19 @@
+void readTeamsFromFile(const string& filename, vector<Team>& teams) {
+    ifstream file("C:\\Users\\githu\\OneDrive\\Desktop\\C++vscode\\teamsfix.csv");
+    if (!file.is_open()) {
+        cerr << "Could not open the file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    getline(file, line); // Skip header
+    while (getline(file, line)) {
+        stringstream s(line);
+        Team team;
+        getline(s, team.name, ',');
+        getline(s, team.town, ',');
+        getline(s, team.stadium, ',');
+        teams.push_back(team);
+    }
+    file.close();
+}
